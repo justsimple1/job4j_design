@@ -15,21 +15,25 @@ public final class MemStore<T extends Base> implements Store<T> {
     @Override
     public boolean replace(String id, T model) {
         int index = getIndex(id);
-        if (index != -1) mem.set(index, model);
+        if (index != -1) {
+            mem.set(index, model);
+        }
         return index != -1;
     }
 
     @Override
     public boolean delete(String id) {
         int index = getIndex(id);
-        if (index != -1) mem.remove(index);
+        if (index != -1) {
+            mem.remove(index);
+        }
         return index != -1;
     }
 
     private int getIndex(String id) {
         int index = -1;
         for (int temp = 0; temp < mem.size(); temp++) {
-            if(mem.get(temp).equals(id)) {
+            if (mem.get(temp).equals(id)) {
                 index = temp;
                 break;
             }
