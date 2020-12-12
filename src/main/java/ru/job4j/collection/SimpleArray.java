@@ -6,25 +6,27 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleArray<T> implements Iterable<T> {
-    T[] array = (T[]) new Object[]{};
+
+    private T[] array = (T[]) new Object[10];
 
     /**указатель следующей пучстой ячейки в коллекции*/
-    int position = 0;
+    private int position = 0;
     /**количество элементов в коллекции*/
-    int modCount = 0;
+    private int modCount = 0;
 
     public T get(int index) {
-        return Objects.checkIndex(index, array.length) < position ? array[index] : null;
+        Objects.checkIndex(index, position);
+        return  array[index];
     }
 
     public void add(T model) {
         modCount++;
-        if (modCount >= array.length) {
-            T[] newArray = (T[]) new Object[array.length + 1];
+        if (position >= array.length) {
+            T[] newArray = (T[]) new Object[array.length * 2];
             System.arraycopy(array, 0, newArray, 0, array.length);
             array = newArray;
-            array[position++] = model;
         }
+        array[position++] = model;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return currentIndex < position && array[currentIndex] != null;
+                return currentIndex < position;
             }
 
             @Override
