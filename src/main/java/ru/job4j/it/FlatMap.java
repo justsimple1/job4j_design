@@ -2,9 +2,7 @@ package ru.job4j.it;
 
 import java.util.*;
 
-
 public class FlatMap<T> implements Iterator<T> {
-
     private final Iterator<Iterator<T>> data;
     private Iterator<T> cursor = Collections.emptyIterator();
 
