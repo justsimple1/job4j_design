@@ -11,28 +11,32 @@ public class SimpleQueue<T> {
         if (in.size == out.size) {
             throw new NoSuchElementException();
         }
+        boolean revert = false;
         T temp = null;
-        if (in.size > out.size) {
-            while (in.size != 1) {
-                out.push(in.pop());
+            while (in.size > -1) {
+                if (in.size == 1 && !revert) {
+                    temp = in.pop();
+                } else {
+                    if (in.size == 0) {
+                        revert = true;
+                    }
+                    if (!revert) {
+                        out.push(in.pop());
+                    } else {
+                        if (out.size != 0) {
+                            in.push(out.pop());
+                        } else {
+                            break;
+                        }
+                    }
+                }
             }
-           temp = in.pop();
-        } else {
-            while (out.size != 1) {
-                in.push(out.pop());
-            }
-            temp = out.pop();
-        }
         size--;
         return temp;
     }
 
     public void push(T value) {
-        if (out.size > in.size) {
-            out.push(value);
-        } else {
-            in.push(value);
-        }
+        in.push(value);
         size++;
     }
 }
