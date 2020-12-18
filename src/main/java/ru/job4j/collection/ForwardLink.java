@@ -22,18 +22,16 @@ public class ForwardLink<T> implements Iterable<T> {
     }
 
     public void revert() {
-        int count = size;
         Node<T> next = head;
         Node<T> previous = null;
-        while (count != 0) {
-                Node<T> current = next;
-                previous = current.next;
-                next = previous;
-                next.next = current;
-                count--;
-            }
-        head = next;
+        while (next != null) {
+            Node<T> current = next.next;
+            next.next = previous;
+            previous = next;
+            next = current;
         }
+        head = previous;
+    }
 
     @Override
     public Iterator<T> iterator() {
