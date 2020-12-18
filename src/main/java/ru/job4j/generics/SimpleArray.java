@@ -14,11 +14,13 @@ public class SimpleArray<T> implements Iterable<T> {
      * Конструктор класса
      * @param size -  количество ячеек.
      * */
-    SimpleArray(int size) {
+    public SimpleArray(int size) {
         this.capacity = size;
         this.array = (T[]) new Object[capacity];
     }
-
+    public int size() {
+        return capacity;
+    }
     /**
      * Метод  добавляет указанный элемент (model) в первую свободную ячейку;
      * @param model - добавляемый элемент
