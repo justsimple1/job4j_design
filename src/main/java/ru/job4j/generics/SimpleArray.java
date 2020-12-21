@@ -19,7 +19,7 @@ public class SimpleArray<T> implements Iterable<T> {
         this.array = (T[]) new Object[capacity];
     }
     public int size() {
-        return capacity;
+        return position;
     }
     /**
      * Метод  добавляет указанный элемент (model) в первую свободную ячейку;
@@ -89,7 +89,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return currentIndex < capacity && array[currentIndex] != null;
+                return currentIndex < position;
             }
 
             @Override
