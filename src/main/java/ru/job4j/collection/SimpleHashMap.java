@@ -1,4 +1,5 @@
 package ru.job4j.collection;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -34,8 +35,9 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Node> {
     }
 
     private int size = 4;
-    private float capacity = 0.75f;
+    private float loadFactor = 0.75f;
     private int count = 0;
+    private int modCount = 0;
 
     private Node<K, V>[] container = new Node[size];
 
@@ -67,7 +69,8 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Node> {
         if (container[index] == null) {
             container[index] = new Node(key, value);
             count++;
-            if (count  >= container.length * capacity) {
+            modCount++;
+            if (count  >= container.length * loadFactor) {
                 resize();
             }
         } else {
@@ -84,8 +87,9 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Node> {
     public boolean delete(K key) {
         boolean rsl = false;
         int index = indexTable(key, container);
-        if (container[index] != null) {
+        if (container[index] != null && container[index].key.equals(key)) {
             container[index] = null;
+            modCount++;
             count--;
             rsl = true;
         }
@@ -95,10 +99,10 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Node> {
     @Override
     public Iterator<Node> iterator() {
         return new Iterator<Node>() {
-            int index = 0;
-            int sizeIterator = count;
-            Node<K, V> next = null;
-
+           private int index = 0;
+           private int sizeIterator = count;
+           private Node<K, V> next = null;
+           private  int expectedModCount = modCount;
             private Node findNext() {
                 next = null;
                 for (int i = index; i < size; i++) {
@@ -120,6 +124,8 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Node> {
             public Node next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
+                } else if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
                 }
                 return findNext();
             }
