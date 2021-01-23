@@ -81,7 +81,7 @@ public class SimpleHashMap<K, V> implements Iterable<SimpleHashMap.Node> {
 
     public V get(K key) {
         Node<K, V> e = container[indexTable(key, container)];
-        return e.key.equals(key) ? e.value : null;
+        return e.key != null && e.key.equals(key) ? e.value : null;
     }
 
     public boolean delete(K key) {
