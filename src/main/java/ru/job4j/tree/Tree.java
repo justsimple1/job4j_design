@@ -14,10 +14,14 @@ class Tree<E> implements SimpleTree<E> {
     public boolean add(E parent, E child) {
         boolean rsl = false;
         Optional<Node<E>> node;
-        if (findBy(child).isEmpty() && (node = findBy(parent)).isPresent()) {
-            node.get().children.add(new Node<>(child));
-            rsl = true;
-        } return rsl;
+        if (findBy(child).isEmpty()) {
+            node = findBy(parent);
+            if (node.isPresent()) {
+                node.get().children.add(new Node<>(child));
+                rsl = true;
+            }
+        }
+        return rsl;
     }
 
     @Override

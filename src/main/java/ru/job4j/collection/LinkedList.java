@@ -46,7 +46,7 @@ public class LinkedList<T> implements Iterable<T> {
         for (int i = 0; i < index; i++) {
             current = current.next;
         }
-        return (T) current;
+        return current.item;
     }
     @Override
     public Iterator<T> iterator() {

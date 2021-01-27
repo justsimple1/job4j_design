@@ -33,7 +33,7 @@ public final class MemStore<T extends Base> implements Store<T> {
     private int getIndex(String id) {
         int index = -1;
         for (int temp = 0; temp < mem.size(); temp++) {
-            if (mem.get(temp).equals(id)) {
+            if (mem.get(temp).getId().equals(id)) {
                 index = temp;
                 break;
             }
