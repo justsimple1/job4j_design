@@ -1,12 +1,13 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LogFilter {
     public static List<String> filter(String file) {
-        List<String> result = null;
+        List<String> result = Collections.emptyList();
         try (var buff = new BufferedReader(new FileReader(file))) {
            result =  buff.lines().filter(e -> e.contains("404")).collect(Collectors.toList());
         } catch (Exception e) {
