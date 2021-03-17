@@ -20,11 +20,10 @@ public class Config {
                 String line = read.readLine();
                 if (line.contains("=")) {
                     String[] split = line.split("=");
-                    if (split.length > 1) {
-                        values.put(split[0], split[1]);
-                    } else {
+                    if (split.length < 2) {
                         throw new IllegalArgumentException();
                     }
+                    values.put(split[0], split[1]);
                 }
             }
         } catch (Exception e) {

@@ -18,10 +18,4 @@ public class ConfigTest {
         );
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void whenNoArgumentThanIAE() {
-        String path = "./data/comment.properties";
-        Config config = new Config(path);
-        config.load();
-    }
 }
