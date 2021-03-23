@@ -7,15 +7,14 @@ import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class SearchFiles implements FileVisitor<Path> {
 
-    private Predicate<Path> condition;
+    private String condition;
     private List<Path> list = new ArrayList<>();
 
-    SearchFiles(Predicate<Path> condition) {
+    SearchFiles(String condition) {
         this.condition = condition;
     }
 
@@ -25,7 +24,7 @@ public class SearchFiles implements FileVisitor<Path> {
     }
 
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if (condition.test(file)) {
+        if (file.getFileName().toString().contains(condition)) {
             list.add(file);
         }
         return CONTINUE;
