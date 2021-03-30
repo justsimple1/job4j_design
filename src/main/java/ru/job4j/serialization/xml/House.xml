@@ -1,0 +1,12 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<house demolish="false" height="180" width="250" length="350" >
+    <address street="Heroes avenue" number="23"/>
+    <numberEmptyRoomses>
+        <numberEmptyRooms>8</numberEmptyRooms>
+        <numberEmptyRooms>14</numberEmptyRooms>
+        <numberEmptyRooms>23</numberEmptyRooms>
+        <numberEmptyRooms>51</numberEmptyRooms>
+        <numberEmptyRooms>64</numberEmptyRooms>
+        <numberEmptyRooms>97</numberEmptyRooms>
+    </numberEmptyRoomses>
+</house>
