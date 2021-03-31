@@ -1,0 +1,13 @@
+create table item(
+	id serial primary key,
+	time date,
+	price int,
+	name varchar(255),
+	description text
+);
+
+insert into item(time, price, name, description) values('2021-03-31 18:07:05', 25, 'task', 'create object');
+
+update item set price = 64;
+
+delete from item;
