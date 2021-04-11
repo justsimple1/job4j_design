@@ -37,11 +37,11 @@ class Tree<E> implements SimpleTree<E> {
         return find(data, el -> el.children.size() > 2).isEmpty();
     }
 
-    public Optional<Node<E>> find (Queue<Node<E>> data, Predicate<Node<E>> condition) {
+    public Optional<Node<E>> find(Queue<Node<E>> data, Predicate<Node<E>> condition) {
         Optional<Node<E>> rsl = Optional.empty();
         while (!data.isEmpty()) {
             Node<E> el = data.poll();
-            if(condition.test(el)) {
+            if (condition.test(el)) {
                 rsl = Optional.of(el);
                 break;
             }
