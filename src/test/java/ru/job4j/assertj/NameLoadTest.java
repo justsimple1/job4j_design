@@ -28,7 +28,6 @@ class NameLoadTest {
                 .hasMessageContaining("this name: key:value does not contain the symbol '='");
     }
 
-
     @Test
     void notContainKey() {
         NameLoad nameLoad = new NameLoad();
@@ -36,7 +35,6 @@ class NameLoadTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("this name: =value does not contain a key");
     }
-
 
     @Test
     void notContainValue() {
